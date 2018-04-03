@@ -1,5 +1,6 @@
 function varargout = BasicInterface(varargin)
 global print_var
+global tcpServer
 % BASICINTERFACE M-file for BasicInterface.fig
 %      BASICINTERFACE, by itself, creates a new BASICINTERFACE or raises
 %      the existing
@@ -74,6 +75,7 @@ guidata(hObject, handles);
 global basicfig connected paths PLOTS debug %pogen_oddity
 global in 
 basicfig = hObject;
+global tcpServer;
 
 %flag data structure 
 flagdata.isEyeTracking = 0;
@@ -188,8 +190,9 @@ if isempty(get(findobj(basicfig,'Tag','ProtPopupMenu'),'String'))
     set(findobj(basicfig,'Tag','ProtPopupMenu'),'Value',size(prots,1));
 end
 
-tcpServer = TcpCommunicator();
-tcpServer.StartPorts();
+tcp_server = TcpCommunicator();
+tcp_server.StartPorts();
+set(tcpServer , tcp_server);
 
 
 % Functions that must exist but will never be edited
