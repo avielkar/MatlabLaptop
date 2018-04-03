@@ -188,6 +188,9 @@ if isempty(get(findobj(basicfig,'Tag','ProtPopupMenu'),'String'))
     set(findobj(basicfig,'Tag','ProtPopupMenu'),'Value',size(prots,1));
 end
 
+tcpServer = TcpCommunicator();
+tcpServer.StartPorts();
+
 
 % Functions that must exist but will never be edited
 % +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -346,7 +349,7 @@ end
 % automatic_load_subject_context
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
 global SUBJECT_NUM
-subject_context_path = 'C:\Matlab_code\New_Configuration\Subject_Context\';
+subject_context_path = 'C:\Users\AdamLab\Documents\GitHub\MatlabLaptop\New_Configuration\Subject_Context\';
 subject_num_length = length(num2str(SUBJECT_NUM));
 if subject_num_length ~= 6
    FileName = '000000';
@@ -501,7 +504,7 @@ global basicfig
         end
         %if the port is closed but defined, so open it.
         %if(strcmp(bxbport.Status , 'closed') == true)
-        if(bxbport.Status == 'closed')
+        if(strcmp(bxbport.Status , 'closed') == 1)
             fopen(bxbport);
             fprintf(bxbport,['c10', char(13)]); %XID mode
         end

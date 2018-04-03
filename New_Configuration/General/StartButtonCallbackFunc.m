@@ -257,7 +257,7 @@ setappdata(basicfig,'psychPlot',psychPlot);
 % ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 if connected
-    initServer
+%     initServer
 end
 
 % If Order Repeated every time start protocol set rand state here

@@ -205,7 +205,8 @@ if ~paused && flagdata.isStopButton == 0
         %send the trial number + 1 because it is updated after the post
         %trial stage only.
         outString = ['Trial' ' ' num2str(cldata.trialCount + 1)]; 
-        cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+        tcpServer.WriteString(PortsDef.FIRSTPORTA , 'abcdfg');
+        %cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
         
         %% send info to MoogDots about the current trial.
         for i = 1:length(data.configinfo)

@@ -10,8 +10,8 @@ global paths
 % % %   paths.datapath_primary = 'Z:\Data\CID_Moog'; % this will be the final place that data lives -- Tunde 04/08/09
 
 % Added by Jing on Mar 06 2008 for testing at Jing's local computer only
-  paths.configpath = 'C:\Matlab_code\New_Configuration\Protocols';
-  paths.datapath = 'C:\Matlab_code\New_Configuration\Data';
+  paths.configpath = 'C:\Users\AdamLab\Documents\GitHub\MatlabLaptop\New_Configuration\Protocols';
+  paths.datapath = 'C:\Users\AdamLab\Documents\GitHub\MatlabLaptop\New_Configuration\Data';
  
 % Path used in hunam lab local c:\
 %     paths.configpath = 'C:\Program Files\MATLAB\R2006a\work\New Configuration\Protocols';
@@ -30,6 +30,6 @@ global paths
 %      paths.parampath = 'Z:\Users\Dylan\TestSetup\HumanMoog\New Configuration\Parameters';
 
 % Added by Jing on Mar 06 2008 for testing at Jing's local computer only
- paths.parampath = 'C:\Matlab_code\New_Configuration\Parameters';
+ paths.parampath = 'C:\Users\AdamLab\Documents\GitHub\MatlabLaptop\New_Configuration\Parameters';
 %   paths.parampath = 'C:\Program Files\MATLAB\R2006a\work\New Configuration\Parameters';
 paths.protpath = paths.configpath;
