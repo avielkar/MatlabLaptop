@@ -23,7 +23,7 @@ activeRule = data.activeRule;
 cntr = trial(activeStair,activeRule).cntr;
 cnInd = trial(activeStair,activeRule).list(cntr);
 
-stymulus_type_index = -1;
+stimulus_type_index = -1;
 delta_index = -1;
 
 
@@ -63,7 +63,7 @@ for i = 1:size(data.configinfo,2)
     %avi - for sol protocol of DELTA - saving the delta as minus or plus in order to
     %make it readen in the results without the stymuls type.
     if(isequal(name , 'STIMULUS_TYPE'))
-        stymulus_type_index = i;
+        stimulus_type_index = i;
     end
     if(isequal(name , 'DELTA'))
         delta_index = i;
@@ -84,8 +84,8 @@ end
 %======End 01/27/09=========
 
 %avi - for sol protocol of DELTA
-if(stymulus_type_index ~= -1 && delta_index ~= -1)
-    stim_type = SavedInfo(activeStair,activeRule).Rep(rep).Trial(cntr).Param(stymulus_type_index).value;
+if(stimulus_type_index ~= -1 && delta_index ~= -1)
+    stim_type = SavedInfo(activeStair,activeRule).Rep(rep).Trial(cntr).Param(stimulus_type_index).value;
     if(stim_type == 5)%reverse the DELTA
         inverse_delta = -SavedInfo(activeStair,activeRule).Rep(rep).Trial(cntr).Param(delta_index).value;
         SavedInfo(activeStair,activeRule).Rep(rep).Trial(cntr).Param(delta_index).value = inverse_delta;
@@ -104,6 +104,29 @@ if(stymulus_type_index ~= -1 && delta_index ~= -1)
     
 end
 %avi - end for sol protocol
+
+%%
+%change the coherence savd value according to the trial(varying
+%duplicated).
+stim_type = 0;
+if data.configinfo(stimulus_type_index).status == 2
+    i1 = strmatch('Stimulus Type',{char(varying.name)},'exact');
+    stim_type = crossvals(cnInd,i1);
+elseif data.configinfo(i).status == 3 
+    stim_type = across.parameters(activeStair);
+elseif data.configinfo(i).status == 4   
+    stim_type = within.parameters(trial(activeStair,activeRule).list(currTrial));
+else
+    stim_type = data.configinfo(i).parameters;
+end
+
+if(stim_type < 0)
+    i_STAR_MOTION_COHERENCE = strmatch('STAR_MOTION_COHERENCE' ,{char(data.configinfo.name)},'exact');
+    i_DUPLICATED_STYYMULUS_TYPE_COHERENCE = strmatch('DUPLICATED_STYYMULUS_TYPE_COHERENCE' ,{char(data.configinfo.name)},'exact');
+    val = SavedInfo(activeStair,activeRule).Rep(rep).Trial(cntr).Param(i_DUPLICATED_STYYMULUS_TYPE_COHERENCE).value
+    SavedInfo(activeStair,activeRule).Rep(rep).Trial(cntr).Param(i_STAR_MOTION_COHERENCE).value = val;
+end
+%%
 
 %======Save the trial history info. Jing 5/15/09========
 SavedInfo(activeStair,activeRule).Resp(rep).trialCount(cntr) = cldata.trialCount;

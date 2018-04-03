@@ -196,6 +196,7 @@ if ~paused && flagdata.isStopButton == 0
         %-----avi:for Sol DELTA protocol - cohernce duplicated stimulus type
         i_DUPLICATE_STIMULUS_TYPE = strmatch('DUPLICATE_STIMULUS_TYPE' ,{char(data.configinfo.name)},'exact');
         %-----end
+        i_DUPLICATE_COHERNEC_VALUE = strmatch('DUPLICATED_STYYMULUS_TYPE_COHERENCE' ,{char(data.configinfo.name)},'exact');
         
         %%
         
@@ -280,6 +281,24 @@ if ~paused && flagdata.isStopButton == 0
                         end
                     %----end
                     
+                    %check if not a duplicated coherence stim_type for
+                    %varying duplicatd.
+                    elseif(i == i_STAR_MOTION_COHERENCE && is_delta_protocol ~= 1)%duplicate stim type
+                        if(data.configinfo(iSTIMULUS_TYPE).status == 2)
+                            iStimType = strmatch(data.configinfo(iSTIMULUS_TYPE).nice_name,{char(varying.name)},'exact');
+                            if(crossvals(trial.list(trial.cntr),iStimType) < 0)
+                                outString = ['STAR_MOTION_COHERENCE' ' ' num2str(data.configinfo(i_DUPLICATE_COHERNEC_VALUE).parameters)];
+                            else
+                                outString = ['STAR_MOTION_COHERENCE' ' ' num2str(data.configinfo(i).parameters)];
+                            end
+                        else
+                            outString = ['STAR_MOTION_COHERENCE' ' ' num2str(data.configinfo(i).parameters)];
+                        end
+                        
+                        if connected
+                            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
+                        end
+                        
                     elseif(i == iFP_ON)
                         outString = ['FP_ON' ' ' num2str(data.configinfo(i).parameters)];
                         
@@ -304,6 +323,17 @@ if ~paused && flagdata.isStopButton == 0
                     end
                     %----Jing for combine multi-staircase 12/01/08-------
                 elseif data.configinfo(i).status == 2    %varying
+                    %check if the stim type i minus , so convert it and get
+                    %the duplicated coherence value.
+                    valStr = '';
+                    if(i == iSTIMULUS_TYPE && ~cldata.staircase)
+                        i1 = strmatch(data.configinfo(i).nice_name,{char(varying.name)},'exact');
+                        if(crossvals(trial.list(trial.cntr),i1) < 0)%duplicate stim type
+                            valStr = [valStr ' ' num2str(-crossvals(trial.list(trial.cntr),i1))];
+                        else%normal
+                            valStr = [valStr ' ' num2str(crossvals(trial.list(trial.cntr),i1))];
+                        end
+                    else
                     i1 = strmatch(data.configinfo(i).nice_name,{char(varying.name)},'exact');
                     valStr = [];
                     valLen = size(varying(i1).parameters,1);
@@ -316,6 +346,8 @@ if ~paused && flagdata.isStopButton == 0
                             valStr = [valStr ' ' num2str(crossvals(trial.list(trial.cntr),i1))];
                         end
                     end
+                    end
+                    
                     outString = [data.configinfo(i).name ' ' valStr];
 
                     if debug

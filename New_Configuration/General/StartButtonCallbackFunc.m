@@ -341,6 +341,8 @@ while iRep<=data.reps && ~flagdata.isTrialStop && ~flagdata.isStopButton %Jing 0
                         %flag)
                         if(strmatch(data.configfile , '1Adam_Delta.mat' ,'exact'))    %if sol DELTA protocol.
                             trial(i,j).duplicatedTrial = across.isParametersDuplicated(i);
+                        else
+                            trial(i,j).duplicatedTrial = false;
                         end
                         %----end
                     end
@@ -404,6 +406,9 @@ while iRep<=data.reps && ~flagdata.isTrialStop && ~flagdata.isStopButton %Jing 0
                 data.stillActive(j) = 1;
                 trial(j).num = str2num(get(findobj(basicfig,'Tag','NumTrialsText'),'String'));
             end
+            
+        else%if no across and within make the field 0
+            trial(1,1).duplicatedTrial = false;
         end
         
         %%-----avi:for Adam1_Prior protocol
@@ -456,7 +461,11 @@ while iRep<=data.reps && ~flagdata.isTrialStop && ~flagdata.isStopButton %Jing 0
         else % random (every rep, or total)
             trial.list = randperm(trial.num);
         end
+        
+        %if no across and within make the field 0
+        trial(1,1).duplicatedTrial = false;    
     end
+    
 
     setappdata(basicfig,'protinfo',data);
     setappdata(basicfig,'trialInfo',trial);
