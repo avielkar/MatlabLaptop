@@ -206,7 +206,7 @@ if ~paused && flagdata.isStopButton == 0
         %send the trial number + 1 because it is updated after the post
         %trial stage only.
         outString = ['Trial' ' ' num2str(cldata.trialCount + 1)]; 
-        tcpServer.WriteString(PortsDef.FIRSTPORTA , 'abcdfg');
+        tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
         %cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
         
         %% send info to MoogDots about the current trial.
@@ -219,7 +219,7 @@ if ~paused && flagdata.isStopButton == 0
                             disp(outString)
                         end
                         if connected
-                            cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                         end
                         %                       this needed to be done so Moogdots gets the
                         %                       correctly named parameter
@@ -260,7 +260,7 @@ if ~paused && flagdata.isStopButton == 0
                         end
 
                         if connected
-                            cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                         end
                         %-----Jing end 09/03/2008-----------------------
                         
@@ -276,7 +276,7 @@ if ~paused && flagdata.isStopButton == 0
                         end
                         
                         if connected
-                            cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                         end
                     %----end
                     
@@ -290,7 +290,7 @@ if ~paused && flagdata.isStopButton == 0
                         end
                         
                         if connected
-                            cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                         end
                     else
                         outString = [data.configinfo(i).name ' ' num2str(data.configinfo(i).parameters)];
@@ -299,7 +299,7 @@ if ~paused && flagdata.isStopButton == 0
                         end
 
                         if connected
-                            cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                         end
                     end
                     %----Jing for combine multi-staircase 12/01/08-------
@@ -322,7 +322,7 @@ if ~paused && flagdata.isStopButton == 0
                         disp(outString)
                     end
                     if connected
-                        cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                        tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                     end
                 elseif data.configinfo(i).status == 3  % acrossStair
                     i1 = strmatch(data.configinfo(i).nice_name,{char(across.name)},'exact');
@@ -344,7 +344,7 @@ if ~paused && flagdata.isStopButton == 0
                         disp(outString)
                     end
                     if connected
-                        cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                        tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                     end
                 else    %withinStair
                     i1 = strmatch(data.configinfo(i).nice_name,{char(within.name)},'exact');
@@ -365,7 +365,7 @@ if ~paused && flagdata.isStopButton == 0
                         disp(outString)
                     end
                     if connected
-                        cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                        tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                     end
                 end
 
@@ -374,7 +374,7 @@ if ~paused && flagdata.isStopButton == 0
             if i == iROT_ORIGIN
                 outString = ['ROT_ORIGIN' ' ' num2str(data.configinfo(i).parameters.moog)];
                 if connected
-                    cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                    tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                     disp(outString)
                 end
             end
@@ -394,7 +394,7 @@ if ~paused && flagdata.isStopButton == 0
                     disp(outString)
                 end
                 if connected
-                    cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                    tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                 end
             end
             %--------Jing end 11/10/2008
@@ -413,9 +413,9 @@ if ~paused && flagdata.isStopButton == 0
                 % Newline added before b/c strange symbol seen on client
                 % before first command
                 if i1 == 1 % first time send newline before data to separate junk from commands
-                    cbDWriteString(COMBOARDNUM, sprintf('\n%s\n', outString), 5);
+                    tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                 else
-                    cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                    tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                 end
             end
         end
@@ -596,7 +596,7 @@ if ~paused && flagdata.isStopButton == 0
             outString = 'GO_TO_ZERO 1.0';
             disp(outString)
             if connected
-                cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString),5);
+                tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
             end
             
             pause(2);
@@ -616,7 +616,7 @@ if ~paused && flagdata.isStopButton == 0
         end
 
         if connected
-            cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString),5);
+            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
         end
         %-----Jing end-------
 
@@ -626,14 +626,14 @@ if ~paused && flagdata.isStopButton == 0
             disp(outString)
    
             if connected
-                cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString),5);
+                tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
             end
             
             outString = 'FP_ON 1.0';
             disp(outString)
    
             if connected
-                cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString),5);
+                tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
             end
         end
         %%  
@@ -748,7 +748,7 @@ if ~paused && flagdata.isStopButton == 0
         %the command for the MoogDoots with the current properties for
         %making the movement and after this line the movement starts.
         if connected
-            cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString),5);
+            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
         end
 
         %---Jing for light control. Turn off the light any way when trial starts. 12/03/07---
@@ -768,7 +768,7 @@ if ~paused && flagdata.isStopButton == 0
             if cldata.fpcontrol ~= 0
                 COMBOARDNUM = 0;
                 outString = 'FP_ON 0.0';
-                cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString),5);
+                tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
             end
         end
         %----Jing end 12/03/07---
@@ -993,7 +993,7 @@ if ~paused
                     % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % %
                     outString = 'GO_TO_ORIGIN 1';
                     if connected
-                        cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                        tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                     end
                     %
                     %                     if debug
@@ -1026,7 +1026,7 @@ if ~paused
         COMBOARDNUM = 0;
         outString = 'STAR_LEYE_COLOR 1 0 0';%%%%%%
         if connected
-            cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
         end
         if debug
             disp(outString)
@@ -1034,7 +1034,7 @@ if ~paused
 
         outString = 'STAR_REYE_COLOR 1 0 0';%%%%%%
         if connected
-            cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
         end
         if debug
             disp(outString)
@@ -1049,7 +1049,7 @@ if ~paused
         WallOrigin=data.configinfo(i).parameters;
         outString = ['WALL_ORIGIN 0 ',num2str(WallOrigin),' 0'];
         if connected
-            cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+            tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
         end
         if debug
             disp(outString)
@@ -1254,7 +1254,7 @@ if ~paused
             if cldata.responeInMiddle == 0
                 outString = 'GO_TO_ORIGIN 1';%%%%%%%
                 if connected
-                    cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                    tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
                 end
             end
         elseif strcmp(data.configfile,'rEyePursuitWithAZTuning.mat')   %Jian 09/20/2012
@@ -1263,20 +1263,20 @@ if ~paused
             outString = ['M_ORIGIN' ' ' a sprintf('\n')];
             disp(outString)
             if connected
-                cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
             end
             
             outString = 'GO_TO_ZERO 1.0';
             disp(outString)
             if connected
-                cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString),5);
+                tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
             end
             
         else %i.e. not reaction time task
             outString = 'GO_TO_ORIGIN 1';%%%%%%% 
             disp(outString)
             if connected
-                cbDWriteString(COMBOARDNUM, sprintf('%s\n', outString), 5);
+                tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
             end
         end
         %%
