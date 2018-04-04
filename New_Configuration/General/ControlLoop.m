@@ -785,20 +785,19 @@ if ~paused && flagdata.isStopButton == 0
 
         %---Jing for light control. Turn off the light any way when trial starts. 12/03/07---
         if connected
-            boardNum = 1;
-            portNum = 1;
-            direction = 1;
-            errorCode = cbDConfigPort(boardNum, portNum, direction);
-            if errorCode ~= 0
-                str = cbGetErrMsg(errorCode);
-%                 disp(['WRONG cbDConfigPort ' str])
-            end
-            cbDOut(boardNum, portNum, 0);
+% % % % % % % % % % %             boardNum = 1;
+% % % % % % % % % % %             portNum = 1;
+% % % % % % % % % % %             direction = 1;
+% % % % % % % % % % %             errorCode = cbDConfigPort(boardNum, portNum, direction);
+% % % % % % % % % % %             if errorCode ~= 0
+% % % % % % % % % % %                 str = cbGetErrMsg(errorCode);
+% % % % % % % % % % % %                 disp(['WRONG cbDConfigPort ' str])
+% % % % % % % % % % %             end
+% % % % % % % % % % %             cbDOut(boardNum, portNum, 0);
             cldata.lightflag = 0;
 
             %Jing 02/09/10 for mandy  %Jian modified 08/10/12 for Ardom
             if cldata.fpcontrol ~= 0
-                COMBOARDNUM = 0;
                 outString = 'FP_ON 0.0';
                 tcpServer.WriteString(PortsDef.FIRSTPORTA , outString);
             end
@@ -900,30 +899,30 @@ if ~paused
     %% ----Jing for light control between 1I and 2I or 2I and 3I movement  12/03/07----
     if cldata.lightcontrol == 2 && connected
         if toc >= cldata.firstIntTime+timeOffset && cldata.lightflag == 0 %---1I end---
-            boardNum = 1;
-            portNum = 1;
-            direction = 1;
-            errorCode = cbDConfigPort(boardNum, portNum, direction);
-            if errorCode ~= 0
-                str = cbGetErrMsg(errorCode);
-%                 disp(['WRONG cbDConfigPort ' str])
-            end
-            cbDOut(boardNum, portNum, 8);  %---Turn on the light ---
-            cldata.lightflag = 1;
+% % % % % % % % % % % % % % % % % %             boardNum = 1;
+% % % % % % % % % % % % % % % % % %             portNum = 1;
+% % % % % % % % % % % % % % % % % %             direction = 1;
+% % % % % % % % % % % % % % % % % %             errorCode = cbDConfigPort(boardNum, portNum, direction);
+% % % % % % % % % % % % % % % % % %             if errorCode ~= 0
+% % % % % % % % % % % % % % % % % %                 str = cbGetErrMsg(errorCode);
+% % % % % % % % % % % % % % % % % %                 disp(['WRONG cbDConfigPort ' str])
+% % % % % % % % % % % % % % % % % %             end
+% % % % % % % % % % % % % % % % % %             cbDOut(boardNum, portNum, 8);  %---Turn on the light ---
+% % % % % % % % % % % % % % % % % %             cldata.lightflag = 1;
             setappdata(appHandle, 'ControlLoopData', cldata);
         end
 
         if toc >= cldata.firstIntTime+cldata.delayTime+timeOffset && cldata.lightflag == 1 %---2I start---
-            boardNum = 1;
-            portNum = 1;
-            direction = 1;
-            errorCode = cbDConfigPort(boardNum, portNum, direction);
-            if errorCode ~= 0
-                str = cbGetErrMsg(errorCode);
-%                 disp(['WRONG cbDConfigPort ' str])
-            end
-            cbDOut(boardNum, portNum, 0);  %---Turn off the light---
-            cldata.lightflag = 2;
+% % % % % % % % % % % % % % % % % % % %             boardNum = 1;
+% % % % % % % % % % % % % % % % % % % %             portNum = 1;
+% % % % % % % % % % % % % % % % % % % %             direction = 1;
+% % % % % % % % % % % % % % % % % % % %             errorCode = cbDConfigPort(boardNum, portNum, direction);
+% % % % % % % % % % % % % % % % % % % %             if errorCode ~= 0
+% % % % % % % % % % % % % % % % % % % %                 str = cbGetErrMsg(errorCode);
+% % % % % % % % % % % % % % % % % % % % %                 disp(['WRONG cbDConfigPort ' str])
+% % % % % % % % % % % % % % % % % % % %             end
+% % % % % % % % % % % % % % % % % % % %             cbDOut(boardNum, portNum, 0);  %---Turn off the light---
+% % % % % % % % % % % % % % % % % % % %             cldata.lightflag = 2;
             setappdata(appHandle, 'ControlLoopData', cldata);
         end
     end
