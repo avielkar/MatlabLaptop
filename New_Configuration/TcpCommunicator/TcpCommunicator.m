@@ -21,6 +21,10 @@ classdef TcpCommunicator < handle
             fwrite(obj.TcpServerPortMap(portNum) , 10 , 'char');    
         end
         
+        function WriteNum(obj , portNum , val)
+            fwrite(obj.TcpServerPortMap(portNum) , val , 'double');
+        end
+        
        function  obj  = TcpCommunicator()
         obj.TcpServerPortMap = containers.Map('KeyType' , 'int32' , 'ValueType' , 'any');
        end
