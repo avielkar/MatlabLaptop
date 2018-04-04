@@ -1172,6 +1172,7 @@ function PostTrialStage(appHandle)
 global connected debug
 global bxbport
 global print_var
+global tcpServer
 
 data = getappdata(appHandle, 'protinfo');
 if(data.condvect.priors.enabled)
