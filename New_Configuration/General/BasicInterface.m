@@ -190,9 +190,8 @@ if isempty(get(findobj(basicfig,'Tag','ProtPopupMenu'),'String'))
     set(findobj(basicfig,'Tag','ProtPopupMenu'),'Value',size(prots,1));
 end
 
-tcp_server = TcpCommunicator();
-tcp_server.StartPorts();
-set(tcpServer , tcp_server);
+tcpServer = TcpCommunicator();
+tcpServer.StartPorts();
 
 
 % Functions that must exist but will never be edited
