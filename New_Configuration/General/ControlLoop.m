@@ -922,7 +922,7 @@ if ~paused
 % % % % % % % % % % % % % % % % % % % % %                 disp(['WRONG cbDConfigPort ' str])
 % % % % % % % % % % % % % % % % % % % %             end
 % % % % % % % % % % % % % % % % % % % %             cbDOut(boardNum, portNum, 0);  %---Turn off the light---
-% % % % % % % % % % % % % % % % % % % %             cldata.lightflag = 2;
+% % % % % % % % % % % % % % % % % % %             cldata.lightflag = 2;
             setappdata(appHandle, 'ControlLoopData', cldata);
         end
     end
@@ -1494,17 +1494,17 @@ if ~paused
         flushinput(bxbport);
         
         %% ---Jing for light control 12/03/07---
-        if connected && cldata.lightcontrol ~= 0
-            boardNum = 1;
-            portNum = 1;
-            direction = 1;
-            errorCode = cbDConfigPort(boardNum, portNum, direction);
-            if errorCode ~= 0
-                str = cbGetErrMsg(errorCode);
-%                 disp(['WRONG cbDConfigPort ' str])
-            end
-            cbDOut(boardNum, portNum,8);
-        end
+% % % % % % % % % % % % % % % %         if connected && cldata.lightcontrol ~= 0
+% % % % % % % % % % % % % % % %             boardNum = 1;
+% % % % % % % % % % % % % % % %             portNum = 1;
+% % % % % % % % % % % % % % % %             direction = 1;
+% % % % % % % % % % % % % % % %             errorCode = cbDConfigPort(boardNum, portNum, direction);
+% % % % % % % % % % % % % % % %             if errorCode ~= 0
+% % % % % % % % % % % % % % % %                 str = cbGetErrMsg(errorCode);
+% % % % % % % % % % % % % % % % %                 disp(['WRONG cbDConfigPort ' str])
+% % % % % % % % % % % % % % % %             end
+% % % % % % % % % % % % % % % %             cbDOut(boardNum, portNum,8);
+% % % % % % % % % % % % % % % %         end
         %% ---end 12/03/07---
 
         %% Analyze Response to determine next trial (Staircase)
