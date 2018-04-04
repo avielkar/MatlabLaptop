@@ -22,7 +22,9 @@ classdef TcpCommunicator < handle
         end
         
         function WriteNum(obj , portNum , val)
-            fwrite(obj.TcpServerPortMap(portNum) , val , 'double');
+            %swap the bytes beacause c++ is big endian and matlab is little
+            %endian encoding.
+            fwrite(obj.TcpServerPortMap(portNum) , swapbytes(val) , 'double');
         end
         
        function  obj  = TcpCommunicator()
