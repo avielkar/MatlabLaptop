@@ -934,18 +934,18 @@ if ~paused
     if toc >= cldata.firstIntTime+cldata.delayTime+timeOffset && cldata.resp == 0
         flagdata = getappdata(basicfig,'flagdata');
         if connected
-            % Configure Port
-            boardNum = 1;
-            portNum = 1;
-            direction = 1;
-            errorCode = cbDConfigPort(boardNum, portNum, direction);
-            if errorCode ~= 0
-                str = cbGetErrMsg(errorCode);
-%                 disp(['WRONG cbDConfigPort ' str])
-            end
-            response = cbDIn(boardNum, portNum);
-            response = mod(response, 8);   %---Jing for light control 12/03/07---
-            %             response = 1; %%%automatic response !
+% % % % % % % % % % % % %             % Configure Port
+% % % % % % % % % % % % %             boardNum = 1;
+% % % % % % % % % % % % %             portNum = 1;
+% % % % % % % % % % % % %             direction = 1;
+% % % % % % % % % % % % %             errorCode = cbDConfigPort(boardNum, portNum, direction);
+% % % % % % % % % % % % %             if errorCode ~= 0
+% % % % % % % % % % % % %                 str = cbGetErrMsg(errorCode);
+% % % % % % % % % % % % % %                 disp(['WRONG cbDConfigPort ' str])
+% % % % % % % % % % % % %             end
+% % % % % % % % % % % % %             response = cbDIn(boardNum, portNum);
+% % % % % % % % % % % % %             response = mod(response, 8);   %---Jing for light control 12/03/07---
+% % % % % % % % % % % % %             %             response = 1; %%%automatic response !
             if(print_var)
                 fprintf('unknown source = %d' , response);
                 display('the unknown source is comming\n');
@@ -1193,15 +1193,15 @@ if ~paused
         
         %% ----movdelaycontrol Set the bit to 0v. Jing 01/28/09
         if cldata.movdelaycontrol
-            boardNum = 1;
-            portNum = 1;
-            direction = 1;
-            errorCode = cbDConfigPort(boardNum, portNum, direction);
-            if errorCode ~= 0
-                str = cbGetErrMsg(errorCode);
-%                 disp(['WRONG cbDConfigPort ' str])
-            end
-            cbDOut(boardNum, portNum, 0);
+% % % % % % % % % % % % % % %             boardNum = 1;
+% % % % % % % % % % % % % % %             portNum = 1;
+% % % % % % % % % % % % % % %             direction = 1;
+% % % % % % % % % % % % % % %             errorCode = cbDConfigPort(boardNum, portNum, direction);
+% % % % % % % % % % % % % % %             if errorCode ~= 0
+% % % % % % % % % % % % % % %                 str = cbGetErrMsg(errorCode);
+% % % % % % % % % % % % % % % %                 disp(['WRONG cbDConfigPort ' str])
+% % % % % % % % % % % % % % %             end
+% % % % % % % % % % % % % % %             cbDOut(boardNum, portNum, 0);
         end
         %% End 01/08/09
         
