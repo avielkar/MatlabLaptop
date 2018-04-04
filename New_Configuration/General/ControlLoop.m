@@ -1352,8 +1352,7 @@ if ~paused
         %avi's readString for the head motion tracking values.
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %tell the moog that the matlab waits for the Oculus head tracking.
-        errorCode = cbDConfigPort(0, 13, 1);%FIRSTPORTCH
-        cbDOut(0 , 13 , 2);%FIRSTPORTCH
+        tcpServer.WriteNum(PortsDef.FIRSTPORTCH , 2);
         
         
         %wait untill it ack matlab for start sending the data.
