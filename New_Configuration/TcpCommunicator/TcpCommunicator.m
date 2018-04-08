@@ -27,6 +27,10 @@ classdef TcpCommunicator < handle
             fwrite(obj.TcpServerPortMap(portNum) , swapbytes(val) , 'double');
         end
         
+        function val = ReadDouble(obj , portNum)
+           val = fread(obj.TcpServerPortMap(portNum) , 1 , 'double');
+        end
+        
        function  obj  = TcpCommunicator()
         obj.TcpServerPortMap = containers.Map('KeyType' , 'int32' , 'ValueType' , 'any');
        end
