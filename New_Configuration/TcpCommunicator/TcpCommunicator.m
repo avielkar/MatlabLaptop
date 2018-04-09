@@ -29,6 +29,10 @@ classdef TcpCommunicator < handle
            val = fread(obj.TcpServerPortMap(portNum) , 1 , 'double');
         end
         
+        function array = ReadByteArray(obj , portNum , numOfBytes)
+            array = fread(obj.TcpServerPortMap(portNum) , numOfBytes , 'ushort');
+        end
+        
        function  obj  = TcpCommunicator()
         obj.TcpServerPortMap = containers.Map('KeyType' , 'int32' , 'ValueType' , 'any');
        end
