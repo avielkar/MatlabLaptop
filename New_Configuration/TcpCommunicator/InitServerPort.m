@@ -3,7 +3,10 @@ function [tcpServerPort] =  InitServerPort(port)
 displayString = ['InitServerPort ' num2str(port)];
 display (displayString);
 
-tcpServerPort = tcpip('localhost' , port , 'NetworkRole' , 'Server');
+%swap the bytes beacause c++ is big endian and matlab is little
+%endian encoding.
+tcpServerPort = tcpip('localhost' , port , 'NetworkRole' , 'Server'...
+    ,'ByteOrder' , 'littleEndian');            
 fopen(tcpServerPort);
 
 displayString = ['Connected to ' num2str(port)];
