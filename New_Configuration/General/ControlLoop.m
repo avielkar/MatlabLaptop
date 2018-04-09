@@ -1386,7 +1386,8 @@ if ~paused
 % % % % % %         end
 
         readDataVector = tcpServer.ReadByteArray(9190 , sizeOfData);
-        display(size(readDataSize));
+        readDataSize = size(readDataVector);
+        display(readDataSize(1));
 
 % % % % % %         disp('before ending the processing communication');
 % % % % % %         %if there no error during reading - make the final handshake
@@ -1403,16 +1404,17 @@ if ~paused
         
         %if there was no errortry to save the data - if no error occures
         %during parsing the data.
-        if(CBWDReadStringError == 0)
-            display('waiting for the 1');
-            sd = unicode2native(s);
-            length(sd);
-            sd = mod(sd , 16);
-            x1 = sd(1:2:end);
-            x2 = sd(2:2:end);
+        if(readDataSize(1) == sizeOfData)
+            sd = readDataVector;
+% % % % % % % % % % % % % % % % % % % % % % % % %             display('waiting for the 1');
+% % % % % % % % % % % % % % % % % % % % % % % % %             sd = unicode2native(s);
+% % % % % % % % % % % % % % % % % % % % % % % % %             length(sd);
+% % % % % % % % % % % % % % % % % % % % % % % % %             sd = mod(sd , 16);
+% % % % % % % % % % % % % % % % % % % % % % % % %             x1 = sd(1:2:end);
+% % % % % % % % % % % % % % % % % % % % % % % % %             x2 = sd(2:2:end);
 
             try
-                sd = x1*16 + x2;
+% % % % % % % %                 sd = x1*16 + x2;
 
                 sdf = typecast(sd ,'single');
 
